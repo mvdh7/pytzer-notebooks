@@ -1,1 +1,2 @@
-pytzer==0.2.6
+pytzer==0.2.7
+scipy==1.1.0
