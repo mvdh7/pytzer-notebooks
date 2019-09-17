@@ -17,11 +17,11 @@ def printmols(fixions, fixmols, eles=[], tots=[]):
     else:
         print('Solute molalities:')
     for i, ion in enumerate(fixions):
-        print('{:.5f} mol/kg-H2O = [{}]'.format(fixmols[i], ion))
+        print('{:.6f} mol/kg-H2O = [{}]'.format(fixmols[i], ion))
     if len(eles) > 0:
         print('\nEquilibrating solute total molalities:')
         for e, ele in enumerate(eles):
-            print('{:.5f} mol/kg-H2O = [{}]'.format(tots[e],
+            print('{:.6f} mol/kg-H2O = [{}]'.format(tots[e],
                 ele.split('t_')[1]))
 
 def solve(solutearrays, tempK, pres):
@@ -91,13 +91,13 @@ def pHgrads(solutearrays, tempK, pres):
     lnks = _getlnks(tempK)
     gradargs = (solutearrays, tempK, pres, *lnks)
     pHgrad_HSO4 = _pHT_grad_HSO4(*gradargs)
-    print('{} = dpH/dK(HSO4)'.format(pHgrad_HSO4))
+    print('{:+.6f} = dpH/dlnK(HSO4)'.format(pHgrad_HSO4))
     pHgrad_trisH = _pHT_grad_trisH(*gradargs)
-    print('{} = dpH/dK(trisH)'.format(pHgrad_trisH))
+    print('{:+.6f} = dpH/dlnK(trisH)'.format(pHgrad_trisH))
     pHgrad_MgOH = _pHT_grad_MgOH(*gradargs)
-    print('{} = dpH/dK(MgOH)'.format(pHgrad_MgOH))
+    print('{:+.6f} = dpH/dlnK(MgOH)'.format(pHgrad_MgOH))
     pHgrad_H2O = _pHT_grad_H2O(*gradargs)
-    print('{} = dpH/dK(H2O)'.format(pHgrad_H2O))
+    print('{:+.6f} = dpH/dlnK(H2O)'.format(pHgrad_H2O))
     return {
         'HSO4': pHgrad_HSO4,
         'trisH': pHgrad_trisH,
